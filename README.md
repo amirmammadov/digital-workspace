@@ -1,8 +1,4 @@
 # digital-workspace
 This is a fullstack application.
 
-User techs: 
----Front side:
-React, TypeScript, Redux(Redux Toolkit), SASS
----Back side:
-NodeJs, ExpressJs, MongoDB, Mongoose
+User techs: React, TypeScript, Redux(Redux Toolkit), SASS, NodeJs, ExpressJs, MongoDB, Mongoose
