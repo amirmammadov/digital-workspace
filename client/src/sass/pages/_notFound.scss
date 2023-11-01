@@ -1,0 +1,40 @@
+@import "../base/typography";
+@import "../utils/colors";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.notfound__page {
+  height: 100vh;
+  background-color: $grey;
+  @include flexbox($justify: center, $items: center);
+
+  &__card {
+    width: 40%;
+    height: auto;
+    background-color: $white;
+    box-shadow: $box-shadow;
+    border-radius: 0.5rem;
+    padding: 25px;
+    @include flexbox(
+      $direction: column,
+      $justify: center,
+      $items: center,
+      $gap: 1.5em
+    );
+
+    &--title {
+      color: $dark;
+      @extend %title1;
+    }
+
+    &__switch {
+      text-decoration: none;
+      color: $dark;
+      font-size: 18px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

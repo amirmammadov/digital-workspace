@@ -1,0 +1,65 @@
+@import "../base/typography";
+@import "../utils/colors";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.sign__page {
+  background: url("/assets/bg.jpg") center center no-repeat;
+  background-size: cover;
+  height: 100vh;
+  @include flexbox($justify: center, $items: center);
+
+  &__card {
+    @include flexbox(
+      $direction: column,
+      $justify: space-between,
+      $items: center,
+      $gap: 4em
+    );
+    background-color: $white;
+    width: 30%;
+    height: auto;
+    padding: 2rem 4rem;
+    border-radius: 0.5rem;
+    border: 1px solid $grey;
+    box-shadow: $box-shadow;
+
+    &--title {
+      color: $dark;
+      @extend %title1;
+    }
+
+    &__switch {
+      text-decoration: none;
+      color: $dark;
+      font-size: 17px;
+
+      span:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .pop-up {
+    position: fixed;
+    z-index: 2000;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -5%);
+    width: auto;
+    height: auto;
+    border-radius: 0.5em;
+    font-size: 1.1em;
+    padding: 1em;
+    color: $white;
+    box-shadow: $box-shadow;
+  }
+
+  .pop-up__error {
+    background-color: $red;
+  }
+
+  .pop-up__success {
+    background-color: $green;
+  }
+}

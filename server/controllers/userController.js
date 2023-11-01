@@ -5,6 +5,30 @@ import jwt from "jsonwebtoken";
 export const registerUser = async (req, res) => {
   const { username, password } = req.body;
 
+  if (!username || !password) {
+    return res
+      .status(400)
+      .json({ message: "Please, provide username or password!" });
+  }
+
+  if (username.length < 5) {
+    return res
+      .status(400)
+      .json({ message: "Your username must contain at least 5 symbols!" });
+  }
+
+  if (password.length < 6) {
+    return res
+      .status(400)
+      .json({ message: "Your password must contain at least 6 symbols!" });
+  }
+
+  const person = await User.findOne({ username });
+
+  if (person) {
+    return res.status(400).json({ message: "Username already taken!" });
+  }
+
   const salt = await bcrypt.genSalt();
   const passwordHash = await bcrypt.hash(password, salt);
 
@@ -22,16 +46,22 @@ export const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    if (!username || !password) {
+      return res
+        .status(400)
+        .json({ message: "Please, provide username or password!" });
+    }
+
     const person = await User.findOne({ username });
 
     if (!person) {
-      return res.status(400).json({ msg: "User doesn't exist..." });
+      return res.status(400).json({ message: "User doesn't exist..." });
     }
 
     const isMatch = await bcrypt.compare(password, person.password);
 
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid credentials..." });
+      return res.status(400).json({ message: "Invalid credentials..." });
     }
 
     const token = jwt.sign(
