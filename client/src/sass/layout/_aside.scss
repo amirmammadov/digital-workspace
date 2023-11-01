@@ -1,0 +1,53 @@
+@import "../base/typography";
+@import "../utils/colors";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.aside {
+  width: 350px;
+  height: 700px;
+  position: fixed;
+  @include flexbox(
+    $direction: column,
+    $justify: flex-start,
+    $items: flex-start,
+    $gap: 1em
+  );
+  background-color: $grey;
+  padding: 10px 20px;
+  border-right: 0.5px solid $dark;
+
+  &__addBtn {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: $green;
+    border: none;
+    outline: none;
+    color: $white;
+    border-radius: 0.5rem;
+    font-size: 16px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
+  }
+
+  &__folderContainer {
+    border-top: 1px solid $dark;
+    width: 100%;
+    @include flexbox(
+      $direction: column,
+      $justify: flex-start,
+      $items: flex-start,
+      $gap: 1em
+    );
+    padding: 30px 0;
+    height: 100%;
+    overflow-y: scroll;
+  }
+
+  &__folderContainer::-webkit-scrollbar {
+    display: none;
+  }
+}

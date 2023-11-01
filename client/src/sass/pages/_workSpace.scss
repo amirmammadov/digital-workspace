@@ -1,0 +1,14 @@
+@import "../base/typography";
+@import "../utils/colors";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.workSpace {
+  width: 100vw;
+  height: auto;
+
+  &__content {
+    // @include flexbox($justify: space-between, $items: center);
+    width: 100%;
+  }
+}

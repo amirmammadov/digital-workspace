@@ -1,0 +1,27 @@
+@import "../base/typography";
+@import "../utils/colors";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.space {
+  @include flexbox(
+    $direction: column,
+    $justify: flex-start,
+    $items: flex-start
+  );
+  padding-left: 350px;
+
+  &__header {
+    background-color: $grey;
+    color: $dark;
+    width: 100%;
+    padding: 20px;
+    height: auto;
+    border-bottom: 1px solid $dark;
+    font-size: 18px;
+  }
+
+  &__content {
+    padding: 20px;
+  }
+}

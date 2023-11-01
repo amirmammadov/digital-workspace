@@ -1,0 +1,43 @@
+@import "../base/typography";
+@import "../utils/colors";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.nav {
+  width: 100%;
+  height: auto;
+  background-color: $white;
+  box-shadow: $box-shadow2;
+  padding: 20px;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  @include flexbox($justify: space-between, $items: center, $gap: 2em);
+
+  &__title {
+    font-size: 22px;
+    border-bottom: 3px solid $green;
+    margin-right: auto;
+    text-decoration: none;
+    color: $dark;
+    padding-bottom: 3px;
+  }
+
+  &__message {
+    font-size: 22px;
+    color: $green;
+  }
+
+  &__btn {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &__img {
+      width: 20px;
+      height: auto;
+    }
+  }
+}

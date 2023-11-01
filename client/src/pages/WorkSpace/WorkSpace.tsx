@@ -1,17 +1,15 @@
-import { useDispatch } from "react-redux";
-import { setLogout } from "../../features/authSlice";
+import Nav from "../../components/Nav/Nav";
+import Aside from "../../components/Aside/Aside";
+import Space from "../../components/Space/Space";
 
 const WorkSpace = () => {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(setLogout());
-  };
-
   return (
-    <div>
-      <h1>work space</h1>
-      <button onClick={handleLogout}>Log out</button>
+    <div className="workSpace">
+      <Nav />
+      <div className="workSpace__content">
+        <Aside />
+        <Space />
+      </div>
     </div>
   );
 };
