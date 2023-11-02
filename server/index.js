@@ -6,6 +6,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import userRouter from "./routes/userRoutes.js";
+import folderRouter from "./routes/folderRoutes.js";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(morgan("common"));
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/folder", folderRouter);
 
 const PORT = process.env.PORT || 3000;
 

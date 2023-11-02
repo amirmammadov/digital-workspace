@@ -1,0 +1,13 @@
+@import "../base/typography";
+@import "../utils/colors";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.empty__space {
+  padding-left: 350px;
+  height: 100vh;
+  @include flexbox($justify: center, $items: flex-start);
+  padding-top: 60px;
+  font-size: 20px;
+  color: $green;
+}

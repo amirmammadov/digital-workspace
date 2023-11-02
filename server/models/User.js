@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please,provide your password!"],
       minLength: 6,
     },
+    folders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Folder",
+      },
+    ],
   },
   { timestamps: true }
 );

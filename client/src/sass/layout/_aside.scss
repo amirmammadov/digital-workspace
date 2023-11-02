@@ -17,19 +17,30 @@
   padding: 10px 20px;
   border-right: 0.5px solid $dark;
 
-  &__addBtn {
+  &__addFolder {
     width: 100%;
-    padding: 10px 20px;
-    background-color: $green;
-    border: none;
-    outline: none;
-    color: $white;
-    border-radius: 0.5rem;
     font-size: 16px;
+    @include flexbox($justify: flex-start, $items: center, $gap: 1em);
 
-    &:hover {
-      cursor: pointer;
-      opacity: 0.9;
+    &__input {
+      padding: 10px;
+      border: 1px solid $dark;
+      outline: none;
+      border-radius: 0.5rem;
+    }
+
+    &__btn {
+      padding: 10px 20px;
+      background-color: $green;
+      border: none;
+      outline: none;
+      color: $white;
+      border-radius: 0.5rem;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
     }
   }
 
