@@ -12,13 +12,34 @@
   padding-left: 350px;
 
   &__header {
-    background-color: $grey;
-    color: $dark;
-    width: 100%;
-    padding: 20px;
-    height: auto;
+    @include flexbox($justify: space-between, $items: center);
+    // padding: 20px;
     border-bottom: 1px solid $dark;
-    font-size: 18px;
+    width: 100%;
+    height: auto;
+    background-color: $grey;
+
+    &__text {
+      color: $dark;
+      font-size: 18px;
+      padding: 20px;
+    }
+
+    &__btn {
+      border: none;
+      outline: none;
+      background-color: $green;
+      border-radius: 0.5rem;
+      color: $white;
+      padding: 10px;
+      margin: 10px 20px;
+      font-size: 16px;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+    }
   }
 
   &__content {
