@@ -1,0 +1,49 @@
+@import "../base/typography";
+@import "../utils/colors";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.fileItem {
+  @include flexbox($justify: flex-start, $items: center, $gap: 1.5em);
+  padding: 15px;
+  width: 100%;
+  border-bottom: 1px solid $dark;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $grey2;
+  }
+
+  &__img {
+    width: 25px;
+    height: auto;
+  }
+
+  &__name {
+    margin-right: 200px;
+    font-size: 17px;
+    width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__info {
+    @include flexbox($justify: flex-start, $items: center, $gap: 2em);
+    font-size: 17px;
+
+    &__size {
+      width: 70px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &__modified {
+      width: 100px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,6 +1,6 @@
-import Nav from "../../components/Nav/Nav";
-import Aside from "../../components/Aside/Aside";
-import Space from "../../components/Space/Space";
+import Nav from "../../scenes/Nav/Nav";
+import Aside from "../../scenes/Aside/Aside";
+import Space from "../../scenes/Space/Space";
 
 const WorkSpace = () => {
   return (

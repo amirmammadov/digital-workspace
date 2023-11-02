@@ -1,6 +1,6 @@
 import "../../sass/layout/_aside.scss";
 
-import FolderItem from "../FolderItem/FolderItem";
+import FolderItem from "../../components/FolderItem/FolderItem";
 
 const Aside = () => {
   return (
