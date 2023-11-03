@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 
 import userRouter from "./routes/userRoutes.js";
 import folderRouter from "./routes/folderRoutes.js";
@@ -13,6 +14,8 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.use(cors());
 

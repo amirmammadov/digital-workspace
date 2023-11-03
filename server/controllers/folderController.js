@@ -3,9 +3,9 @@ import Folder from "../models/Folder.js";
 
 export const getFolder = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { userID, id } = req.params;
 
-    const folder = await Folder.findById(id);
+    const folder = await Folder.findById({ userID, _id: id });
 
     res.status(200).json(folder);
   } catch (error) {
