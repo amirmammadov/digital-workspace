@@ -7,7 +7,7 @@ import { StateProps } from "../../interfaces";
 
 import "../../sass/layout/_aside.scss";
 
-import FolderItems from "../../components/FolderItem/FolderItem";
+import FolderItem from "../../components/FolderItem/FolderItem";
 
 const Aside = () => {
   const [title, setTitle] = useState<string>("");
@@ -50,7 +50,7 @@ const Aside = () => {
         </button>
       </div>
       <div className="aside__folderContainer">
-        <FolderItems />
+        <FolderItem />
       </div>
     </aside>
   );

@@ -18,6 +18,14 @@ const Space = () => {
     createdAt: -1,
     updatedAt: -1,
   });
+  const [fileData, setFileData] = useState<File | null>(null);
+
+  const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFile = e.target.files[0];
+      setFileData(selectedFile);
+    }
+  };
 
   const userID = useSelector((state: StateProps) => state.userID);
   const token = useSelector((state: StateProps) => state.token);
@@ -41,17 +49,49 @@ const Space = () => {
   };
 
   useEffect(() => {
-    if (openedFolderId !== -1) {
+    if (openedFolderId !== -1 && userID !== -1) {
       fetchFolder();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openedFolderId]);
+  }, [openedFolderId, userID]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (fileData) {
+      const data = new FormData();
+      data.append("file", fileData);
+
+      try {
+        await axios.post("/api/", data, {
+          headers: { Authorization: "Bearer " + token },
+        });
+        console.log(fileData);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("No file selected");
+    }
+  };
 
   return (
     <div className="space">
       <div className="space__header">
         <div className="space__header__text">{binder.title}</div>
-        <button className="space__header__btn">Add File</button>
+        <form onSubmit={handleSubmit} className="space__header__form">
+          <label htmlFor="file">Choose file</label>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            className="space__header__form__input"
+            onChange={fileChangeHandler}
+          />
+          <button type="submit" className="space__header__form__btn">
+            Upload
+          </button>
+        </form>
       </div>
       <div className="space__content">
         <div className="space__content__filter">

@@ -70,28 +70,33 @@ const FolderItems = () => {
   }
 
   return binders.map((binder) => (
-    <button
-      key={binder._id}
-      className="aside__folderContainer__item"
-      onClick={() => handleActiveFolder(binder._id)}
-    >
-      <img
-        src="/assets/folder.png"
-        alt="folder"
-        className="aside__folderContainer__item__img"
-      />
-      <p className="aside__folderContainer__item__text">{binder.title}</p>
+    <div className="aside__folder__container">
       <button
-        className="aside__folderContainer__item__deleteBtn"
-        onClick={() => handleDeleteFolder(binder._id)}
+        key={binder._id}
+        className="aside__folder__container__item"
+        onClick={() => handleActiveFolder(binder._id)}
+      >
+        <img
+          src="/assets/folder.png"
+          alt="folder"
+          className="aside__folder__container__item__img"
+        />
+        <p className="aside__folder__container__item__text">{binder.title}</p>
+      </button>
+      <button
+        className="aside__folder__container__deleteBtn"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleDeleteFolder(binder._id);
+        }}
       >
         <img
           src="/assets/delete.png"
           alt="delete"
-          className="aside__folderContainer__item__deleteBtn__img"
+          className="aside__folder__container__deleteBtn__img"
         />
       </button>
-    </button>
+    </div>
   ));
 };
 

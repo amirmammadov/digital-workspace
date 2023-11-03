@@ -3,28 +3,33 @@
 @import "../utils/mixins";
 @import "../utils/variables";
 
-.aside__folderContainer__item {
-  @include flexbox($justify: flex-start, $items: center, $gap: 1em);
+.aside__folder__container {
+  @include flexbox($justify: space-between, $items: center);
   width: 100%;
-  padding: 5px 10px;
-  border-radius: 0.5rem;
-  border: none;
-  outline: none;
-  background-color: transparent;
 
-  &:hover {
-    cursor: pointer;
-    background-color: $grey2;
-  }
+  &__item {
+    @include flexbox($justify: flex-start, $items: center, $gap: 1em);
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
 
-  &__img {
-    width: 30px;
-    height: auto;
-  }
+    &:hover {
+      cursor: pointer;
+      background-color: $grey2;
+    }
 
-  &__text {
-    font-size: 18px;
-    color: $blue;
+    &__img {
+      width: 30px;
+      height: auto;
+    }
+
+    &__text {
+      font-size: 18px;
+      color: $blue;
+    }
   }
 
   &__deleteBtn {
@@ -48,7 +53,7 @@
   }
 
   &:hover {
-    .aside__folderContainer__item__deleteBtn {
+    .aside__folder__container__deleteBtn {
       display: block;
     }
   }

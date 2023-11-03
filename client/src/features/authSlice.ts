@@ -41,14 +41,18 @@ export const authSlice = createSlice({
       state.user = "";
       state.token = "";
       state.userID = -1;
+      state.openedFolderId = -1;
     },
     setFolders: (state, action: PayloadAction<[FolderProps]>) => {
       state.folders = action.payload;
     },
     setDeleteFolder: (state, action: PayloadAction<number>) => {
       const id = action.payload;
-      state.openedFolderId = -1;
+
       state.folders = state.folders.filter((folder) => folder._id !== id);
+      if (state.folders.length === 0 || state.openedFolderId === id) {
+        state.openedFolderId = -1;
+      }
     },
     setActiveFolder: (
       state,

@@ -13,7 +13,6 @@
 
   &__header {
     @include flexbox($justify: space-between, $items: center);
-    // padding: 20px;
     border-bottom: 1px solid $dark;
     width: 100%;
     height: auto;
@@ -25,19 +24,33 @@
       padding: 20px;
     }
 
-    &__btn {
-      border: none;
-      outline: none;
-      background-color: $green;
-      border-radius: 0.5rem;
-      color: $white;
-      padding: 10px;
+    &__form {
+      @include flexbox($justify: space-between, $items: center, $gap: 1em);
       margin: 10px 20px;
-      font-size: 16px;
 
-      &:hover {
+      label {
         cursor: pointer;
-        opacity: 0.9;
+        font-size: 16px;
+        color: $blue;
+      }
+
+      &__input {
+        display: none;
+      }
+
+      &__btn {
+        border: none;
+        outline: none;
+        background-color: $green;
+        border-radius: 0.5rem;
+        color: $white;
+        padding: 5px 10px;
+        font-size: 16px;
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.9;
+        }
       }
     }
   }
