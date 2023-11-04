@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Folder from "../models/Folder.js";
+import File from "../models/File.js";
 
 export const getFolder = async (req, res) => {
   try {
@@ -47,6 +48,12 @@ export const createFolder = async (req, res) => {
 export const deleteFolder = async (req, res) => {
   try {
     const { id } = req.params;
+
+    const files = await File.find({ folderID: id });
+
+    for (const file of files) {
+      await File.findByIdAndDelete(file._id);
+    }
 
     await Folder.findByIdAndDelete(id);
 

@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { useSelector } from "react-redux";
 
-import { StateProps, FolderProps } from "../../interfaces";
+import { StateProps, FolderProps, FileProps } from "../../interfaces";
 
 import "../../sass/layout/_space.scss";
 
@@ -19,6 +19,7 @@ const Space = () => {
     updatedAt: -1,
   });
   const [fileData, setFileData] = useState<File | null>(null);
+  const [files, setFiles] = useState<FileProps[]>();
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -48,10 +49,27 @@ const Space = () => {
     }
   };
 
+  const fetchFiles = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/file/${openedFolderId}/file`,
+        {
+          headers: { Authorization: "Bearer " + token },
+        }
+      );
+
+      setFiles(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (openedFolderId !== -1 && userID !== -1) {
       fetchFolder();
     }
+
+    fetchFiles();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openedFolderId, userID]);
 
@@ -63,7 +81,7 @@ const Space = () => {
       data.append("file", fileData);
 
       try {
-        await axios.post(
+        const response = await axios.post(
           `http://localhost:3000/api/v1/file/${openedFolderId}/file`,
           data,
           {
@@ -74,6 +92,8 @@ const Space = () => {
           }
         );
         setFileData(null);
+        setFiles(response.data);
+        fetchFiles();
       } catch (error) {
         console.log(error);
       }
@@ -119,7 +139,11 @@ const Space = () => {
           </div>
         </div>
         <div className="space__content__files">
-          <FileItem />
+          {files?.map((file) => {
+            if (file.folderID === openedFolderId) {
+              return <FileItem key={file._id} {...file} />;
+            }
+          })}
         </div>
       </div>
     </div>

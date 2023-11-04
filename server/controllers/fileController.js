@@ -1,4 +1,5 @@
 import File from "../models/File.js";
+import Folder from "../models/Folder.js";
 
 export const getFiles = async (req, res) => {
   try {
@@ -32,6 +33,14 @@ export const createFile = async (req, res) => {
     });
 
     await newFile.save();
+
+    // const folder = await Folder.find({ folderID });
+
+    // if (folder) {
+    //   await folder.files.push(newFile);
+    // }
+
+    // await folder.save();
 
     const files = await File.find({ folderID });
 

@@ -12,12 +12,10 @@ const folderSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please,provide userID"],
     },
-    files: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "File",
-      },
-    ],
+    files: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );
