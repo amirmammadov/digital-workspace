@@ -42,6 +42,7 @@ export const authSlice = createSlice({
       state.token = "";
       state.userID = -1;
       state.openedFolderId = -1;
+      state.folders = [];
     },
     setFolders: (state, action: PayloadAction<[FolderProps]>) => {
       state.folders = action.payload;

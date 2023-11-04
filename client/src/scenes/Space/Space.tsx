@@ -8,7 +8,7 @@ import { StateProps, FolderProps } from "../../interfaces";
 
 import "../../sass/layout/_space.scss";
 
-// import FileItem from "../../components/FileItem/FileItem";
+import FileItem from "../../components/FileItem/FileItem";
 
 const Space = () => {
   const [binder, setBinder] = useState<FolderProps>({
@@ -63,10 +63,17 @@ const Space = () => {
       data.append("file", fileData);
 
       try {
-        await axios.post("/api/", data, {
-          headers: { Authorization: "Bearer " + token },
-        });
-        console.log(fileData);
+        await axios.post(
+          `http://localhost:3000/api/v1/file/${openedFolderId}/file`,
+          data,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setFileData(null);
       } catch (error) {
         console.log(error);
       }
@@ -80,7 +87,9 @@ const Space = () => {
       <div className="space__header">
         <div className="space__header__text">{binder.title}</div>
         <form onSubmit={handleSubmit} className="space__header__form">
-          <label htmlFor="file">Choose file</label>
+          <label htmlFor="file">
+            {fileData ? fileData.name : "Choose File"}
+          </label>
           <input
             type="file"
             name="file"
@@ -109,7 +118,9 @@ const Space = () => {
             </button>
           </div>
         </div>
-        <div className="space__content__files">{/* <FileItem /> */}</div>
+        <div className="space__content__files">
+          <FileItem />
+        </div>
       </div>
     </div>
   );

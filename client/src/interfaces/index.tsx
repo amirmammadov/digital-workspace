@@ -10,6 +10,16 @@ export interface FolderProps {
   updatedAt: number;
 }
 
+export interface FileProps {
+  _id: number;
+  folderID: number;
+  username: string;
+  fileName: string;
+  filePath: string;
+  fileSize: string;
+  fileType: string;
+}
+
 export interface StateProps {
   user: string;
   token: string;
