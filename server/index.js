@@ -20,15 +20,15 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.use(cors());
+// app.use(cors());
 
-// const corsOptions = {
-//   origin: "https://digital-workspace-client-amirmammadov.vercel.app/",
-//   methods: ["POST", "GET"],
-//   credentials: true,
-// };
+const corsOptions = {
+  origin: "https://digital-workspace-client-amirmammadov.vercel.app/",
+  methods: ["POST", "GET"],
+  allowedHeaders: "Content-Type",
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(helmet());
 
@@ -74,20 +74,14 @@ app.get("/download/:filename", (req, res) => {
 
   res.setHeader("Content-Type", contentType);
 
-  // res.setHeader("Content-Type", "application/pdf");
-
-  res.download(
-    filePath,
-    "downloaded-book.png", // Remember to include file extension
-    (err) => {
-      if (err) {
-        res.send({
-          error: err,
-          msg: "Problem downloading the file",
-        });
-      }
+  res.download(filePath, "downloaded-book.png", (err) => {
+    if (err) {
+      res.send({
+        error: err,
+        msg: "Problem downloading the file",
+      });
     }
-  );
+  });
 });
 
 app.use("/api/v1/users", userRouter);
