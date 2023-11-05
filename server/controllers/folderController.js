@@ -61,7 +61,7 @@ export const deleteFolder = async (req, res) => {
         if (err) {
           throw err;
         } else {
-          console.log("Successfully deleted the file!");
+          console.log("Successfully deleted the file");
         }
       });
 
