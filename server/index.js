@@ -20,7 +20,13 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://digital-workspace-client-amirmammadov.vercel.app/",
+  methods: ["POST", "GET"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(helmet());
 
