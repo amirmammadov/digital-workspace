@@ -28,3 +28,13 @@ export interface StateProps {
   folders: FolderProps[];
   documents: FileProps[];
 }
+
+export type FileImageMap = {
+  pdf: string;
+  png: string;
+  jpg: string;
+  jpeg: string;
+  txt: string;
+  docx: string;
+  default: string;
+};

@@ -1,5 +1,6 @@
 import File from "../models/File.js";
-import Folder from "../models/Folder.js";
+import fs from "fs/promises";
+import path from "path";
 
 export const getFiles = async (req, res) => {
   try {
@@ -45,6 +46,17 @@ export const createFile = async (req, res) => {
 export const deleteFile = async (req, res) => {
   try {
     const { id } = req.params;
+    const { fileName } = req.body;
+
+    const filePath = path.join("./", "public/assets", fileName);
+
+    fs.unlink(filePath, function (err) {
+      if (err) {
+        throw err;
+      } else {
+        console.log("Successfully deleted the file.");
+      }
+    });
 
     await File.findByIdAndDelete(id);
 

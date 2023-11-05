@@ -21,7 +21,6 @@ const Space = () => {
     updatedAt: -1,
   });
   const [fileData, setFileData] = useState<File | null>(null);
-  // const [files, setFiles] = useState<FileProps[]>();
 
   const dispatch = useDispatch();
 
@@ -39,8 +38,6 @@ const Space = () => {
   );
   const documents = useSelector((state: StateProps) => state.documents);
 
-  console.log(documents);
-
   const fetchFolder = async () => {
     try {
       const response = await axios.get(
@@ -51,7 +48,6 @@ const Space = () => {
       );
 
       setBinder(response.data);
-      // dispatch(setDocuments(response.data));
       fetchFiles();
     } catch (error) {
       console.error(error);
@@ -67,7 +63,6 @@ const Space = () => {
         }
       );
 
-      // setFiles(response.data);
       dispatch(setDocuments(response.data));
     } catch (error) {
       console.error(error);
@@ -102,7 +97,6 @@ const Space = () => {
           }
         );
         setFileData(null);
-        // setFiles(response.data);
         dispatch(setDocuments(response.data));
 
         fetchFiles();
@@ -151,6 +145,10 @@ const Space = () => {
           </div>
         </div>
         <div className="space__content__files">
+          {documents.length === 0 && (
+            <div className="no__file">No file yet!</div>
+          )}
+
           {documents?.map((file) => {
             if (file.folderID === openedFolderId) {
               return <FileItem key={file._id} {...file} />;

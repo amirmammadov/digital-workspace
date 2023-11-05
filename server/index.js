@@ -35,18 +35,38 @@ const storage = multer.diskStorage({
     cb(null, "public/assets");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
 const upload = multer({ storage });
 
+const mimeTypes = {
+  html: "text/html",
+  css: "text/css",
+  js: "application/javascript",
+  json: "application/json",
+  jpg: "image/jpeg",
+  png: "image/png",
+  pdf: "application/pdf",
+  txt: "text/plain",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+};
+
 app.get("/download/:filename", (req, res) => {
   const filePath = path.join("./", "public/assets", req.params.filename);
 
-  console.log(filePath);
+  const { filename } = req.params;
 
-  res.setHeader("Content-Type", "text/plain;charset=utf-8");
+  console.log(filename);
+
+  const fileExtension = filename.split(".")[1];
+
+  const contentType = mimeTypes[fileExtension] || "application/octet-stream";
+
+  res.setHeader("Content-Type", contentType);
+
+  // res.setHeader("Content-Type", "application/pdf");
 
   res.download(
     filePath,

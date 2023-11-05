@@ -5,7 +5,7 @@ import axios from "axios";
 import { StateProps } from "../../interfaces";
 import { setDeleteDocument } from "../../features/authSlice";
 
-// import FileSaver from "file-saver";
+import { findFileName, commonFileSize, defineImgForFile } from "../../helpers";
 
 interface IProps {
   _id: number;
@@ -21,7 +21,6 @@ const FileItem = ({ _id, fileName, fileSize, username }: IProps) => {
     (state: StateProps) => state.openedFolderId
   );
 
-  // const documents = useSelector((state: StateProps) => state.documents);
   const dispatch = useDispatch();
 
   const handleFileClick = async (fileName: string) => {
@@ -50,6 +49,7 @@ const FileItem = ({ _id, fileName, fileSize, username }: IProps) => {
         `http://localhost:3000/api/v1/file/${openedFolderId}/file/${_id}`,
         {
           headers: { Authorization: "Bearer " + token },
+          data: { fileName },
         }
       );
 
@@ -61,12 +61,16 @@ const FileItem = ({ _id, fileName, fileSize, username }: IProps) => {
 
   return (
     <div className="fileItem">
-      <img src="/assets/file.png" alt="file" className="fileItem__img" />
+      <img
+        src={`/assets/${defineImgForFile(fileName)}`}
+        alt="file"
+        className="fileItem__img"
+      />
       <div className="fileItem__name" onClick={() => handleFileClick(fileName)}>
-        {fileName}
+        {findFileName(fileName)}
       </div>
       <div className="fileItem__info">
-        <div className="fileItem__info__size">{fileSize}</div>
+        <div className="fileItem__info__size">{commonFileSize(fileSize)}Mb</div>
         <div className="fileItem__info__modified">{username}</div>
       </div>
       <button className="fileItem__deleteBtn" onClick={handleDeleteFile}>
