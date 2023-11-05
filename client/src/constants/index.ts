@@ -1,1 +1,1 @@
-export const API = "https://digital-workspace-amirmammadov.vercel.app/";
+export const API = "http://localhost:3000/";
