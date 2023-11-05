@@ -34,17 +34,21 @@ export const createFile = async (req, res) => {
 
     await newFile.save();
 
-    // const folder = await Folder.find({ folderID });
-
-    // if (folder) {
-    //   await folder.files.push(newFile);
-    // }
-
-    // await folder.save();
-
     const files = await File.find({ folderID });
 
     res.status(201).json(files);
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const deleteFile = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await File.findByIdAndDelete(id);
+
+    res.status(202).json(id);
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

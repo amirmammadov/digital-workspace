@@ -6,6 +6,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import multer from "multer";
+import path from "path";
 
 import userRouter from "./routes/userRoutes.js";
 import folderRouter from "./routes/folderRoutes.js";
@@ -25,6 +26,8 @@ app.use(helmet());
 
 app.use(morgan("common"));
 
+app.use(express.static("public"));
+
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 const storage = multer.diskStorage({
@@ -37,6 +40,27 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+app.get("/download/:filename", (req, res) => {
+  const filePath = path.join("./", "public/assets", req.params.filename);
+
+  console.log(filePath);
+
+  res.setHeader("Content-Type", "text/plain;charset=utf-8");
+
+  res.download(
+    filePath,
+    "downloaded-book.png", // Remember to include file extension
+    (err) => {
+      if (err) {
+        res.send({
+          error: err,
+          msg: "Problem downloading the file",
+        });
+      }
+    }
+  );
+});
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/folder", folderRouter);
