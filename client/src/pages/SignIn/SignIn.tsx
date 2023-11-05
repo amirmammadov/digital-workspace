@@ -2,6 +2,8 @@ import SignForm from "../../components/SignForm/SignForm";
 
 import "../../sass/pages/_sign.scss";
 
+import { API } from "../../constants";
+
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -25,10 +27,10 @@ const SignIn = () => {
 
   const handleLogin = async (username: string, password: string) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/users/login",
-        { username, password }
-      );
+      const response = await axios.post(`${API}api/v1/users/login`, {
+        username,
+        password,
+      });
 
       dispatch(setLogin(response.data));
       navigate("/", { replace: true });

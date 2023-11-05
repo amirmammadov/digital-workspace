@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import "../../sass/components/_fileItem.scss";
 
+import { API } from "../../constants";
+
 import axios from "axios";
 import { StateProps } from "../../interfaces";
 import { setDeleteDocument } from "../../features/authSlice";
@@ -25,12 +27,9 @@ const FileItem = ({ _id, fileName, fileSize, username }: IProps) => {
 
   const handleFileClick = async (fileName: string) => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/download/${fileName}`,
-        {
-          responseType: "blob",
-        }
-      );
+      const response = await axios.get(`${API}download/${fileName}`, {
+        responseType: "blob",
+      });
       //IF YOU WANNA DOWNLOAD IT
       // FileSaver.saveAs(response.data, fileName);
       const blob = new Blob([response.data], {
@@ -46,7 +45,7 @@ const FileItem = ({ _id, fileName, fileSize, username }: IProps) => {
   const handleDeleteFile = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/v1/file/${openedFolderId}/file/${_id}`,
+        `${API}api/v1/file/${openedFolderId}/file/${_id}`,
         {
           headers: { Authorization: "Bearer " + token },
           data: { fileName },

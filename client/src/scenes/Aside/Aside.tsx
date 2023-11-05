@@ -3,6 +3,8 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { setFolders } from "../../features/authSlice";
 
+import { API } from "../../constants";
+
 import { StateProps } from "../../interfaces";
 
 import "../../sass/layout/_aside.scss";
@@ -20,7 +22,7 @@ const Aside = () => {
   const handleAddFolder = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/v1/folder/${userID}/folder`,
+        `${API}api/v1/folder/${userID}/folder`,
         { userID, title },
         {
           headers: { Authorization: "Bearer " + token },

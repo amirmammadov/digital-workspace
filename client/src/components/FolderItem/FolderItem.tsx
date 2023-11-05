@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import "../../sass/components/_folderItem.scss";
 
+import { API } from "../../constants";
+
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -24,12 +26,9 @@ const FolderItems = () => {
 
   const fetchFolders = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/api/v1/folder/${userID}/folder`,
-        {
-          headers: { Authorization: "Bearer " + token },
-        }
-      );
+      const response = await axios.get(`${API}api/v1/folder/${userID}/folder`, {
+        headers: { Authorization: "Bearer " + token },
+      });
 
       dispatch(setFolders(response.data));
     } catch (error) {
@@ -53,7 +52,7 @@ const FolderItems = () => {
   const handleDeleteFolder = async (id: number) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/v1/folder/${userID}/folder/${id}`,
+        `${API}api/v1/folder/${userID}/folder/${id}`,
         {
           headers: { Authorization: "Bearer " + token },
         }

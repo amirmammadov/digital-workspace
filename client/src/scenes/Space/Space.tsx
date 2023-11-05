@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { API } from "../../constants";
+
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -41,7 +43,7 @@ const Space = () => {
   const fetchFolder = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/v1/folder/${userID}/folder/${openedFolderId}`,
+        `${API}api/v1/folder/${userID}/folder/${openedFolderId}`,
         {
           headers: { Authorization: "Bearer " + token },
         }
@@ -57,7 +59,7 @@ const Space = () => {
   const fetchFiles = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/v1/file/${openedFolderId}/file`,
+        `${API}api/v1/file/${openedFolderId}/file`,
         {
           headers: { Authorization: "Bearer " + token },
         }
@@ -87,7 +89,7 @@ const Space = () => {
 
       try {
         const response = await axios.post(
-          `http://localhost:3000/api/v1/file/${openedFolderId}/file`,
+          `${API}api/v1/file/${openedFolderId}/file`,
           data,
           {
             headers: {

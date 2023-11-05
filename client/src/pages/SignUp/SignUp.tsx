@@ -6,6 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 
 import "../../sass/pages/_sign.scss";
 
+import { API } from "../../constants";
+
 import axios from "axios";
 
 const SignUp = () => {
@@ -29,7 +31,7 @@ const SignUp = () => {
 
   const handleRegister = async (username: string, password: string) => {
     try {
-      await axios.post("http://localhost:3000/api/v1/users/register", {
+      await axios.post(`${API}api/v1/users/register`, {
         username,
         password,
       });
