@@ -64,6 +64,8 @@ export const deleteFolder = async (req, res) => {
           console.log("Successfully deleted the file.");
         }
       });
+
+      await File.findOneAndDelete(file._id);
     }
 
     await Folder.findByIdAndDelete(id);
