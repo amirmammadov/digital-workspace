@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "../../sass/components/_fileItem.scss";
 
 import axios from "axios";
 import { StateProps } from "../../interfaces";
+import { setDeleteDocument } from "../../features/authSlice";
 
 // import FileSaver from "file-saver";
 
@@ -19,6 +20,9 @@ const FileItem = ({ _id, fileName, fileSize, username }: IProps) => {
   const openedFolderId = useSelector(
     (state: StateProps) => state.openedFolderId
   );
+
+  // const documents = useSelector((state: StateProps) => state.documents);
+  const dispatch = useDispatch();
 
   const handleFileClick = async (fileName: string) => {
     try {
@@ -49,7 +53,7 @@ const FileItem = ({ _id, fileName, fileSize, username }: IProps) => {
         }
       );
 
-      console.log(response);
+      dispatch(setDeleteDocument(response.data));
     } catch (error) {
       console.error(error);
     }

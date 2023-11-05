@@ -26,4 +26,5 @@ export interface StateProps {
   userID: number;
   openedFolderId: number;
   folders: FolderProps[];
+  documents: FileProps[];
 }

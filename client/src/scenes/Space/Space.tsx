@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { StateProps, FolderProps, FileProps } from "../../interfaces";
+import { StateProps, FolderProps } from "../../interfaces";
+
+import { setDocuments } from "../../features/authSlice";
 
 import "../../sass/layout/_space.scss";
 
@@ -19,7 +21,9 @@ const Space = () => {
     updatedAt: -1,
   });
   const [fileData, setFileData] = useState<File | null>(null);
-  const [files, setFiles] = useState<FileProps[]>();
+  // const [files, setFiles] = useState<FileProps[]>();
+
+  const dispatch = useDispatch();
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -33,6 +37,9 @@ const Space = () => {
   const openedFolderId = useSelector(
     (state: StateProps) => state.openedFolderId
   );
+  const documents = useSelector((state: StateProps) => state.documents);
+
+  console.log(documents);
 
   const fetchFolder = async () => {
     try {
@@ -44,6 +51,8 @@ const Space = () => {
       );
 
       setBinder(response.data);
+      // dispatch(setDocuments(response.data));
+      fetchFiles();
     } catch (error) {
       console.error(error);
     }
@@ -58,7 +67,8 @@ const Space = () => {
         }
       );
 
-      setFiles(response.data);
+      // setFiles(response.data);
+      dispatch(setDocuments(response.data));
     } catch (error) {
       console.error(error);
     }
@@ -92,7 +102,9 @@ const Space = () => {
           }
         );
         setFileData(null);
-        setFiles(response.data);
+        // setFiles(response.data);
+        dispatch(setDocuments(response.data));
+
         fetchFiles();
       } catch (error) {
         console.log(error);
@@ -139,7 +151,7 @@ const Space = () => {
           </div>
         </div>
         <div className="space__content__files">
-          {files?.map((file) => {
+          {documents?.map((file) => {
             if (file.folderID === openedFolderId) {
               return <FileItem key={file._id} {...file} />;
             }
