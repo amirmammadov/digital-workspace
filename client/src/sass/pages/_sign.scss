@@ -4,7 +4,7 @@
 @import "../utils/variables";
 
 .sign__page {
-  background: url("/assets/bg.jpg") center center no-repeat;
+  background: url("/assets/dark.jpg") center center no-repeat;
   background-size: cover;
   height: 100vh;
   @include flexbox($justify: center, $items: center);
